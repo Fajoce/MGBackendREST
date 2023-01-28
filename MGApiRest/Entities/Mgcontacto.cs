@@ -26,7 +26,6 @@ namespace MGApiRest.Entities
         public string ConTelefono { get; set; }
         [DataType(DataType.Date)]
         public DateTime ConFechaCreacion { get; set; }
-
         public virtual ICollection<Mgcliente> Mgcliente { get; set; }
     }
 }

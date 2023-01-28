@@ -27,6 +27,7 @@ namespace MGApiRest.Controllers
             return await _Irepositorio.GetAll();
         }
 
+     
         // GET api/<Clientes>/5
         [HttpGet("{id}")]
         public async Task<MGClienteDTO> Get(int id)

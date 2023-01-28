@@ -27,6 +27,11 @@ namespace MGApiRest.Controllers
             return await _Irepositorio.GetAll();
         }
 
+        [HttpGet("Carl")]
+        public async Task<IEnumerable<ClientesContactoDTO>> GetAllCarl()
+        {
+            return await _Irepositorio.GetAllBeginWithCarl();
+        }
         // GET api/<ContactosController>/5
         [HttpGet("{id}")]
         public async Task<MGContactoDTO> Get(int id)

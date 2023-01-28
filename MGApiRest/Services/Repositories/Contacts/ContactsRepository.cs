@@ -87,6 +87,32 @@ namespace MGApiRest.Services.Repositories.Contacts
             }
         }
 
+        public async Task<IEnumerable<ClientesContactoDTO>> GetAllBeginWithCarl()
+        {
+            try
+            {
+                var lst = await (from client in _context.Mgcliente
+                           join contact in _context.Mgcontacto on client.CliContactoId equals contact.ConId
+                           where contact.ConNombreCompleto.StartsWith("Carl")
+                           select new ClientesContactoDTO
+                           {
+                               ConId = client.CliId,
+                               ConIdentificacion = client.CliIdentificacion,
+                               ConNombreCompleto = client.CliNombreCompleto,
+                               ConDireccion = client.CliDireccion,
+                               ConTelefono = client.CliTelefono,
+                               ConFechaCreacion = client.CliFechaCreacion,
+                               ConNombre = contact.ConNombreCompleto
+                               
+                           }).ToListAsync();
+                return lst;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<MGContactoDTO> GetContactoById(int id)
         {
             try
@@ -113,8 +139,8 @@ namespace MGApiRest.Services.Repositories.Contacts
             try
             {
                 Random r = new Random();
-                //var cantidad = _context.Mgcontacto.Count();
-                var id = r.Next(1, 5);
+                var cantidad = _context.Mgcontacto.Count()+1;
+                var id = r.Next(1, cantidad);
                 var contacto = await _context.Mgcontacto.Select(c => new ContactoEnviadoDTO()
                 {
                     ConId = c.ConId,
@@ -144,5 +170,7 @@ namespace MGApiRest.Services.Repositories.Contacts
             await _context.SaveChangesAsync();
             return true; ;
         }
+
+
     }
 }

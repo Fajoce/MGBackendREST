@@ -91,6 +91,8 @@ namespace MGApiRest.Services.Repositories.Clients
             }
         }
 
+        
+
         public async Task<MGClienteDTO> GetClientById(int id)
         {
             try
@@ -116,7 +118,6 @@ namespace MGApiRest.Services.Repositories.Clients
         }
 
  
-
         public async Task<bool> UpdateClientAsync(MGClienteDTO cliente)
         {
             var entity = await _context.Mgcliente.FirstOrDefaultAsync(c => c.CliId == cliente.CliId);
