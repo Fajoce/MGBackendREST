@@ -93,22 +93,21 @@ namespace MGApiRest.Services.Repositories.Clients
 
         public async Task<IEnumerable<ClienteMasDeUncontacto>> GetClientsWMTContacts()
         {
-            
-            
+
+
             var morethan = await (from c in _context.Mgcliente join con in _context.Mgcontacto
                                   on c.CliContactoId equals con.ConId
-                                  group c by c.CliContactoId into g
-                                 where g.Count() > 1 
-                                 
+                                  group c by new { c.CliNombreCompleto, c.CliIdentificacion} into g
+                                  where g.Count() > 1
+
                                   select new ClienteMasDeUncontacto
-                           {
-                                      CliId = (int)g.Key,                               
-                                      Count = g.Count(),
+                                  {
+                                                                         
+                                      CliNombreCompleto = g.Key.CliNombreCompleto,
+                                      CliIdentificacion = g.Key.CliIdentificacion,
+                                      Count = g.Count()
+                                  }
 
-                                    
-
-                           }
-                                  
                                   ).ToListAsync();
             
             return morethan;

@@ -8,8 +8,10 @@ namespace MGApiRest.DTO
 {
     public class ClienteMasDeUncontacto
     {
-        public int CliId { get; set; }
-       public Mgcliente mgcliente { get; set; }
+        //public int CliId { get; set; }
+        //public int CliContactoId { get; set; }
+       public string CliNombreCompleto { get; set; }
+        public string CliIdentificacion {get; set; }
         public int Count { get; set; }
     }
 }

@@ -146,10 +146,7 @@ namespace MGApiRest.Services.Repositories.Contacts
                     ConId = c.ConId,
                     ConIdentificacion = c.ConIdentificacion,
                     ConNombreCompleto = c.ConNombreCompleto,
-                    //ConDireccion = c.ConDireccion,
-                    //ConTelefono = c.ConTelefono,
-                    //ConFechaCreacion = c.ConFechaCreacion
-                }).FirstOrDefaultAsync(c => c.ConId == id);
+                    }).FirstOrDefaultAsync(c => c.ConId == id);
                    return contacto;
             }
             catch (Exception ex)

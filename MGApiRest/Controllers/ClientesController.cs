@@ -28,7 +28,7 @@ namespace MGApiRest.Controllers
         }
 
 
-        [HttpGet("Masdedos")]
+        [HttpGet("Masdeuno")]
         public async Task<IEnumerable<ClienteMasDeUncontacto>> GetClientsWMT2Contacts()
         {
             return await  _Irepositorio.GetClientsWMTContacts();
