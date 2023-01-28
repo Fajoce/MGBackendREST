@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MGApiRest", "MGApiRest\MGApiRest.csproj", "{993363CD-0161-4DAB-895E-2BEAFA65F65A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{993363CD-0161-4DAB-895E-2BEAFA65F65A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993363CD-0161-4DAB-895E-2BEAFA65F65A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993363CD-0161-4DAB-895E-2BEAFA65F65A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993363CD-0161-4DAB-895E-2BEAFA65F65A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E19ECA4B-6513-470E-8D49-6018F34CEE5C}
+	EndGlobalSection
+EndGlobal
