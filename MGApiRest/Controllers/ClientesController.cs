@@ -22,29 +22,35 @@ namespace MGApiRest.Controllers
         }
         // GET: api/<Clientes>
         [HttpGet]
-        public async Task<IEnumerable<MGClienteDTO>> Get()
+        public async Task<IEnumerable<GetClientsWMTContacts>> Get()
         {
             return await _Irepositorio.GetAll();
         }
 
-     
+
+        [HttpGet("Masdedos")]
+        public async Task<IEnumerable<ClienteMasDeUncontacto>> GetClientsWMT2Contacts()
+        {
+            return await  _Irepositorio.GetClientsWMTContacts();
+        }
         // GET api/<Clientes>/5
         [HttpGet("{id}")]
-        public async Task<MGClienteDTO> Get(int id)
+        public async Task<GetClientsWMTContacts> Get(int id)
         {
             return await _Irepositorio.GetClientById(id);
         }
 
+
         // POST api/<Clientes>
         [HttpPost]
-        public async Task<string> Post([FromBody] MGClienteDTO clientes)
+        public async Task<string> Post([FromBody] GetClientsWMTContacts clientes)
         {
             return await _Irepositorio.CreateClientAsync(clientes);
         }
 
         // PUT api/<Clientes>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<MGClienteDTO>> Put(int id, [FromBody] MGClienteDTO cliente)
+        public async Task<ActionResult<GetClientsWMTContacts>> Put(int id, [FromBody] GetClientsWMTContacts cliente)
         {
             if (id != cliente.CliId)
             {
