@@ -44,7 +44,7 @@ namespace MGApiRest.Services.Repositories.Clients
             }
             catch (Exception ex)
             {
-                return "Error al Crear el Cliente " + ex.Message;
+                throw new Exception(ex.Message);
             }
         }
 
