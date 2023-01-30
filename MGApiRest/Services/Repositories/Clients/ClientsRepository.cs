@@ -21,18 +21,24 @@ namespace MGApiRest.Services.Repositories.Clients
         {
             try
             {
+                var validar = (from c in _context.Mgcliente
+                               select new
+                               {
+                                   c.CliNombreCompleto,
+                                   c.CliContactoId
+                               }).FirstOrDefaultAsync(c => c.CliNombreCompleto == client.CliNombreCompleto && c.CliContactoId != client.CliContactoId);
 
                 var entity = new Mgcliente()
                 {
                     CliIdentificacion = client.CliIdentificacion,
-                    CliNombreCompleto = client.CliNombreCompleto,
+                    CliNombreCompleto = client.CliNombreCompleto.Trim(),
                     CliDireccion = client.CliDireccion,
                     CliTelefono = client.CliTelefono,
                     CliContactoId = client.CliContactoId,
                     CliFechaCreacion = client.CliFechaCreacion
                 };
                
-                if (entity != null)
+                if (validar != null)
                 {
                     _context.Mgcliente.Add(entity);
                     await _context.SaveChangesAsync();
@@ -84,6 +90,7 @@ namespace MGApiRest.Services.Repositories.Clients
                               CliNombreCompleto = cl.CliNombreCompleto,
                               CliDireccion = cl.CliDireccion,
                               CliTelefono = cl.CliTelefono,
+                              CliContactoId = cl.CliContactoId,
                               CliNombreContacto = con.ConNombreCompleto,
                               CliFechaCreacion = cl.CliFechaCreacion
                           }).OrderByDescending(c => c.CliFechaCreacion).ToListAsync();
@@ -158,6 +165,11 @@ namespace MGApiRest.Services.Repositories.Clients
             entity.CliId = cliente.CliId;
             await _context.SaveChangesAsync();
             return true; ;
+        }
+
+        public bool Existe(string nombre, int? IdContacto)
+        {
+            return _context.Mgcliente.Any(cl=> cl.CliNombreCompleto == nombre && cl.CliContactoId != cl.CliContactoId);
         }
 
    
