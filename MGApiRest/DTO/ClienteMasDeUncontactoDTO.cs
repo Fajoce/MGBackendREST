@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MGApiRest.DTO
 {
-    public class ClienteMasDeUncontacto
+    public class ClienteMasDeUncontactoDTO
     {
         //public int CliId { get; set; }
         //public int CliContactoId { get; set; }

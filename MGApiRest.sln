@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32602.291
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MGApiRest", "MGApiRest\MGApiRest.csproj", "{993363CD-0161-4DAB-895E-2BEAFA65F65A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGApiRest", "MGApiRest\MGApiRest.csproj", "{993363CD-0161-4DAB-895E-2BEAFA65F65A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectMG", "TestProjectMG\TestProjectMG.csproj", "{0356ACDB-8774-4C83-8763-91C8725B5471}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{993363CD-0161-4DAB-895E-2BEAFA65F65A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{993363CD-0161-4DAB-895E-2BEAFA65F65A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{993363CD-0161-4DAB-895E-2BEAFA65F65A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0356ACDB-8774-4C83-8763-91C8725B5471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0356ACDB-8774-4C83-8763-91C8725B5471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0356ACDB-8774-4C83-8763-91C8725B5471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0356ACDB-8774-4C83-8763-91C8725B5471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

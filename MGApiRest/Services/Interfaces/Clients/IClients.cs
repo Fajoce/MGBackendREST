@@ -8,11 +8,11 @@ namespace MGApiRest.Services.Interfaces.Clients
 {
     public interface IClients
     {
-        Task <string>CreateClientAsync(GetClientsWMTContacts client);
+        Task <string>CreateClientAsync(MGClienteDTO client);
         Task<bool> DeleteClientAsync(int id);
-        Task<GetClientsWMTContacts> GetClientById(int id);
-        Task<IEnumerable<GetClientsWMTContacts>> GetAll();
-        Task<bool> UpdateClientAsync(GetClientsWMTContacts genero);
-        Task<IEnumerable<ClienteMasDeUncontacto>> GetClientsWMTContacts();
+        Task<MGClienteDTO> GetClientById(int id);
+        Task<IEnumerable<MGClienteDTO>> GetAll();
+        Task<bool> UpdateClientAsync(MGClienteDTO genero);
+        Task<IEnumerable<ClienteMasDeUncontactoDTO>> GetClientsWMTContacts();
     }
 }

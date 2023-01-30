@@ -17,10 +17,11 @@ namespace MGApiRest.Services.Repositories.Clients
         {
             _context = context;
         }
-        public async Task<string> CreateClientAsync(GetClientsWMTContacts client)
+        public async Task<string> CreateClientAsync(MGClienteDTO client)
         {
             try
             {
+
                 var entity = new Mgcliente()
                 {
                     CliIdentificacion = client.CliIdentificacion,
@@ -30,6 +31,7 @@ namespace MGApiRest.Services.Repositories.Clients
                     CliContactoId = client.CliContactoId,
                     CliFechaCreacion = client.CliFechaCreacion
                 };
+               
                 if (entity != null)
                 {
                     _context.Mgcliente.Add(entity);
@@ -40,11 +42,12 @@ namespace MGApiRest.Services.Repositories.Clients
                 {
                     return "Error al Crear el Cliente";
                 }
+
                 
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return "Error al Crear el Cliente " + ex.Message;
             }
         }
 
@@ -67,22 +70,36 @@ namespace MGApiRest.Services.Repositories.Clients
             }
         }
 
-        public async Task<IEnumerable<GetClientsWMTContacts>> GetAll()
+        public async Task<IEnumerable<MGClienteDTO>> GetAll()
         {
             try
             {
-                var lst = await _context.Mgcliente.Select(c => new GetClientsWMTContacts()
-                {
-                    CliId = c.CliId,
-                    CliIdentificacion = c.CliIdentificacion,
-                    CliNombreCompleto = c.CliNombreCompleto,
-                    CliDireccion = c.CliDireccion,
-                    CliTelefono = c.CliTelefono,
-                    CliContactoId = c.CliContactoId,
-                    CliNombreContacto = c.CliContacto.ConNombreCompleto,
-                    CliFechaCreacion = c.CliFechaCreacion
+                //var lst = await _context.Mgcliente.Select(c => new MGClienteDTO()
+                //{
+                //    CliId = c.CliId,
+                //    CliIdentificacion = c.CliIdentificacion,
+                //    CliNombreCompleto = c.CliNombreCompleto,
+                //    CliDireccion = c.CliDireccion,
+                //    CliTelefono = c.CliTelefono,
+                //    CliContactoId = c.CliContactoId,
+                //    CliNombreContacto = c.CliContacto.ConNombreCompleto,
+                //    CliFechaCreacion = c.CliFechaCreacion
 
-                }).OrderByDescending(c=> c.CliFechaCreacion).ToListAsync();
+                //}).OrderByDescending(c=> c.CliFechaCreacion).ToListAsync();
+                //return lst;
+                var lst = await (from cl in _context.Mgcliente
+                          join con in _context.Mgcontacto
+                            on cl.CliContactoId equals con.ConId
+                          select new MGClienteDTO
+                          {
+                              CliId = cl.CliId,
+                              CliIdentificacion = cl.CliIdentificacion,
+                              CliNombreCompleto = cl.CliNombreCompleto,
+                              CliDireccion = cl.CliDireccion,
+                              CliTelefono = cl.CliTelefono,
+                              CliNombreContacto = con.ConNombreCompleto,
+                              CliFechaCreacion = cl.CliFechaCreacion
+                          }).ToListAsync();
                 return lst;
             }
             catch (Exception ex)
@@ -91,7 +108,7 @@ namespace MGApiRest.Services.Repositories.Clients
             }
         }
 
-        public async Task<IEnumerable<ClienteMasDeUncontacto>> GetClientsWMTContacts()
+        public async Task<IEnumerable<ClienteMasDeUncontactoDTO>> GetClientsWMTContacts()
         {
 
 
@@ -100,7 +117,7 @@ namespace MGApiRest.Services.Repositories.Clients
                                   group c by new { c.CliNombreCompleto, c.CliIdentificacion} into g
                                   where g.Count() > 1
 
-                                  select new ClienteMasDeUncontacto
+                                  select new ClienteMasDeUncontactoDTO
                                   {
                                                                          
                                       CliNombreCompleto = g.Key.CliNombreCompleto,
@@ -113,22 +130,37 @@ namespace MGApiRest.Services.Repositories.Clients
             return morethan;
         }
 
-        public async Task<GetClientsWMTContacts> GetClientById(int id)
+        public async Task<MGClienteDTO> GetClientById(int id)
         {
             try
             {
-                var pedido = await _context.Mgcliente.Select(c => new GetClientsWMTContacts()
-                {
-                    CliId = c.CliId,
-                    CliIdentificacion = c.CliIdentificacion,
-                    CliNombreCompleto = c.CliNombreCompleto,
-                    CliDireccion = c.CliDireccion,
-                    CliTelefono = c.CliTelefono,
-                    CliContactoId = c.CliContactoId,
-                    CliNombreContacto = c.CliContacto.ConNombreCompleto,
-                    CliFechaCreacion = c.CliFechaCreacion
-                }).FirstOrDefaultAsync(c => c.CliId == id);
-                return pedido;
+                //var pedido = await _context.Mgcliente.Select(c => new MGClienteDTO()
+                //{
+                //    CliId = c.CliId,
+                //    CliIdentificacion = c.CliIdentificacion,
+                //    CliNombreCompleto = c.CliNombreCompleto,
+                //    CliDireccion = c.CliDireccion,
+                //    CliTelefono = c.CliTelefono,
+                //    CliContactoId = c.CliContactoId,
+                //    CliNombreContacto = c.CliContacto.ConNombreCompleto,
+                //    CliFechaCreacion = c.CliFechaCreacion
+                //}).FirstOrDefaultAsync(c => c.CliId == id);
+                //return pedido;
+                var lst = await (from cl in _context.Mgcliente
+                                 join con in _context.Mgcontacto
+                                   on cl.CliContactoId equals con.ConId
+                                 select new MGClienteDTO
+                                 {
+                                     CliId = cl.CliId,
+                                     CliIdentificacion = cl.CliIdentificacion,
+                                     CliNombreCompleto = cl.CliNombreCompleto,
+                                     CliDireccion = cl.CliDireccion,
+                                     CliTelefono = cl.CliTelefono,
+                                     CliContactoId = cl.CliContactoId,
+                                     CliNombreContacto = con.ConNombreCompleto,
+                                     CliFechaCreacion = cl.CliFechaCreacion
+                                 }).FirstOrDefaultAsync(c=> c.CliId == id);
+                return lst;
 
             }
             catch (Exception ex)
@@ -138,7 +170,7 @@ namespace MGApiRest.Services.Repositories.Clients
         }
 
  
-        public async Task<bool> UpdateClientAsync(GetClientsWMTContacts cliente)
+        public async Task<bool> UpdateClientAsync(MGClienteDTO cliente)
         {
             var entity = await _context.Mgcliente.FirstOrDefaultAsync(c => c.CliId == cliente.CliId);
             entity.CliIdentificacion = cliente.CliIdentificacion;
@@ -151,5 +183,7 @@ namespace MGApiRest.Services.Repositories.Clients
             await _context.SaveChangesAsync();
             return true; ;
         }
+
+   
     }
 }

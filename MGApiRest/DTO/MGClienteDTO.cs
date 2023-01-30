@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MGApiRest.DTO
 {
-    public class GetClientsWMTContacts
+    public class MGClienteDTO
     {
         public int CliId { get; set; }
         public string CliIdentificacion { get; set; }
