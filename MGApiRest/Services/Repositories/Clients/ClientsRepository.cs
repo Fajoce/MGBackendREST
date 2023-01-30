@@ -74,19 +74,6 @@ namespace MGApiRest.Services.Repositories.Clients
         {
             try
             {
-                //var lst = await _context.Mgcliente.Select(c => new MGClienteDTO()
-                //{
-                //    CliId = c.CliId,
-                //    CliIdentificacion = c.CliIdentificacion,
-                //    CliNombreCompleto = c.CliNombreCompleto,
-                //    CliDireccion = c.CliDireccion,
-                //    CliTelefono = c.CliTelefono,
-                //    CliContactoId = c.CliContactoId,
-                //    CliNombreContacto = c.CliContacto.ConNombreCompleto,
-                //    CliFechaCreacion = c.CliFechaCreacion
-
-                //}).OrderByDescending(c=> c.CliFechaCreacion).ToListAsync();
-                //return lst;
                 var lst = await (from cl in _context.Mgcliente
                           join con in _context.Mgcontacto
                             on cl.CliContactoId equals con.ConId
@@ -99,7 +86,7 @@ namespace MGApiRest.Services.Repositories.Clients
                               CliTelefono = cl.CliTelefono,
                               CliNombreContacto = con.ConNombreCompleto,
                               CliFechaCreacion = cl.CliFechaCreacion
-                          }).ToListAsync();
+                          }).OrderByDescending(c => c.CliFechaCreacion).ToListAsync();
                 return lst;
             }
             catch (Exception ex)
@@ -134,18 +121,7 @@ namespace MGApiRest.Services.Repositories.Clients
         {
             try
             {
-                //var pedido = await _context.Mgcliente.Select(c => new MGClienteDTO()
-                //{
-                //    CliId = c.CliId,
-                //    CliIdentificacion = c.CliIdentificacion,
-                //    CliNombreCompleto = c.CliNombreCompleto,
-                //    CliDireccion = c.CliDireccion,
-                //    CliTelefono = c.CliTelefono,
-                //    CliContactoId = c.CliContactoId,
-                //    CliNombreContacto = c.CliContacto.ConNombreCompleto,
-                //    CliFechaCreacion = c.CliFechaCreacion
-                //}).FirstOrDefaultAsync(c => c.CliId == id);
-                //return pedido;
+             
                 var lst = await (from cl in _context.Mgcliente
                                  join con in _context.Mgcontacto
                                    on cl.CliContactoId equals con.ConId
