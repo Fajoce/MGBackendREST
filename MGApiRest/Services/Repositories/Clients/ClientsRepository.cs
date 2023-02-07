@@ -166,7 +166,7 @@ namespace MGApiRest.Services.Repositories.Clients
             entity.CliFechaCreacion = cliente.CliFechaCreacion;
             entity.CliId = cliente.CliId;
             await _context.SaveChangesAsync();
-            return true; ;
+            return true; 
         }
 
         public bool Existe(string nombre, int? IdContacto)

@@ -76,7 +76,8 @@ namespace MGApiRest.Services.Repositories.Contacts
                     ConNombreCompleto = c.ConNombreCompleto,
                     ConDireccion = c.ConDireccion,
                     ConTelefono = c.ConTelefono,
-                    ConFechaCreacion = c.ConFechaCreacion
+                    ConFechaCreacion = c.ConFechaCreacion,
+                    ConFechaNacimiento = c.ConFechaNacimiento
 
                 }).OrderByDescending(c => c.ConFechaCreacion).ToListAsync();
                 return lst;
@@ -124,7 +125,8 @@ namespace MGApiRest.Services.Repositories.Contacts
                     ConNombreCompleto = c.ConNombreCompleto,
                     ConDireccion = c.ConDireccion,
                     ConTelefono = c.ConTelefono,
-                    ConFechaCreacion = c.ConFechaCreacion
+                    ConFechaCreacion = c.ConFechaCreacion,
+                    ConFechaNacimiento = c.ConFechaNacimiento
                 }).FirstOrDefaultAsync(c => c.ConId == id);
                 return contacto;
             }

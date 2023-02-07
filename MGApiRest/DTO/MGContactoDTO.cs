@@ -13,5 +13,7 @@ namespace MGApiRest.DTO
         public string ConDireccion { get; set; }
         public string ConTelefono { get; set; }
         public DateTime ConFechaCreacion { get; set; }
+
+        public DateTime ConFechaNacimiento { get; set; }
     }
 }
