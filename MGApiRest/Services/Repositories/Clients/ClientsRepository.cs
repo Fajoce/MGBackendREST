@@ -18,15 +18,16 @@ namespace MGApiRest.Services.Repositories.Clients
             _context = context;
         }
         public async Task<string> CreateClientAsync(MGClienteDTO client)
-        {
+        {;
+            string message = "";
             try
             {
-                var validar = (from c in _context.Mgcliente
-                               select new
-                               {
-                                   c.CliNombreCompleto,
-                                   c.CliContactoId
-                               }).FirstOrDefaultAsync(c => c.CliNombreCompleto == client.CliNombreCompleto && c.CliContactoId != client.CliContactoId);
+                //var validar = (from c in _context.Mgcliente
+                //               select new
+                //               {
+                //                   c.CliNombreCompleto,
+                //                   c.CliContactoId
+                //               }).FirstOrDefaultAsync(c => c.CliNombreCompleto == client.CliNombreCompleto && c.CliContactoId != client.CliContactoId);
 
                 var entity = new Mgcliente()
                 {
@@ -38,23 +39,24 @@ namespace MGApiRest.Services.Repositories.Clients
                     CliFechaCreacion = client.CliFechaCreacion
                 };
                
-                if (validar != null)
+                if (!Existe(client.CliNombreCompleto, client.CliContactoId))
                 {
                     _context.Mgcliente.Add(entity);
                     await _context.SaveChangesAsync();
-                    return "Creado Con exito";
+                    message = "Creado Con exito";
                 }
-                else
+                else 
                 {
-                    return "Error al Crear el Cliente";
+                    message = "Error al Crear el Cliente, ya tiene este contacto asignado";
                 }
 
                 
             }
             catch (Exception ex)
             {
-                return "Error al Crear el Cliente " + ex.Message;
+                message = "Error al Crear el Cliente " + ex.Message;
             }
+            return message;
         }
 
         public async Task<bool> DeleteClientAsync(int id)
@@ -169,7 +171,7 @@ namespace MGApiRest.Services.Repositories.Clients
 
         public bool Existe(string nombre, int? IdContacto)
         {
-            return _context.Mgcliente.Any(cl=> cl.CliNombreCompleto == nombre && cl.CliContactoId != cl.CliContactoId);
+            return _context.Mgcliente.Any(cl=> cl.CliNombreCompleto == nombre && cl.CliContactoId == IdContacto);
         }
 
    

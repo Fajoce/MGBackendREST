@@ -14,7 +14,6 @@ namespace MGApiRest.Services.Interfaces.Contacts
         Task<IEnumerable<MGContactoDTO>> GetAll();
         Task<bool> UpdateContactoAsync(MGContactoDTO contacto);
         Task<ContactoEnviadoDTO> GetContactoToCreate();
-
         Task<IEnumerable<ClientesContactoDTO>> GetAllBeginWithCarl();
     }
 }

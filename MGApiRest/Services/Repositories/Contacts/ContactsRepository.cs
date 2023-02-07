@@ -138,9 +138,9 @@ namespace MGApiRest.Services.Repositories.Contacts
         {
             try
             {
-                Random r = new Random();
+                Random obj = new Random();
                 var cantidad = _context.Mgcontacto.Count()+1;
-                var id = r.Next(1, cantidad);
+                var id = obj.Next(1, cantidad);
                 var contacto = await _context.Mgcontacto.Select(c => new ContactoEnviadoDTO()
                 {
                     ConId = c.ConId,
